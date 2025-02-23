@@ -1,3 +1,0 @@
-/home/xenos/Documents/Projects/hashing-project/build/CMakeFiles/HASHING-PROJECT.dir
-/home/xenos/Documents/Projects/hashing-project/build/CMakeFiles/edit_cache.dir
-/home/xenos/Documents/Projects/hashing-project/build/CMakeFiles/rebuild_cache.dir
