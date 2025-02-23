@@ -1,12 +1,3 @@
-# Hashing Project
-(Desember 2024)
-
-```
-/my_project
-  ├── src/
-      ├── hashing-converter.cpp    # C++ source file
-  ├── CMakeLists.txt  # CMake configuration file
-
-```
-
-``` src/hashing-converter.cpp ``` : This is the main logic of c++ program. 
+# Hashing Project using LibSodium in C
+[Date] Sunday, 23 February 2025.
+It will be having several option for hashing in the distiction of hashing method such as, sha256, sha512, etc. 
