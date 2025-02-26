@@ -6,6 +6,8 @@
 
 // Global variable
 
+const unsigned char *inputMsg;
+
 unsigned char hash[crypto_generichash_BYTES];
 unsigned char sha256[crypto_hash_sha256_BYTES]; 
 unsigned char sha512[crypto_hash_sha512_BYTES];
@@ -13,7 +15,7 @@ unsigned char sha512[crypto_hash_sha512_BYTES];
 // Declare built-in function
 
 void headerScript();
-void hashHexadecimal(const char *input[]);
+void hashHexadecimal();
 
 // Main function 
 
@@ -26,8 +28,9 @@ int main(){
         printf("libsodium initialization failed!\n");
         return 0;
     }
-    
-    
+
+    hashHexadecimal(inputMsg);
+
 
     return 0;
 }
@@ -40,14 +43,21 @@ void headerScript() {
     printf("=============================================================================\n");
 }
 
-void hashHexadecimal(const char *input[]){
-    printf("Input your message you need to hash : "); scanf(input);
+void hashHexadecimal(const unsigned char *inputMsg){
+    printf("Input your message you need to hash : "); scanf("%s", inputMsg);
 
     /* size_t = an unsigned integer type used to represent the size of object in bytes 
         strlen() = calculate the lenght of a given string*/
-    size_t input_len = strlen(input); 
+    size_t input_len = strlen(inputMsg); 
     
-    // 
-    crypto_generichash(input, sizeof(input), (const unsigned char *)input, input_len, NULL, 0); 
+    // The inputMsg will be hashed via crypto_generichash
+    crypto_generichash(hash, sizeof(hash), inputMsg, input_len, NULL, 0); 
+
+    // Print the hash
+    printf("Hash : ");
+    for(size_t i; i < sizeof hash; i++) {
+        printf("%02x", hash[i]);
+    }
+    printf("\n");
 }
 
