@@ -1,21 +1,11 @@
 #include <sodium.h>
-#include <sodium/crypto_generichash.h>
-#include <sodium/crypto_hash_sha256.h>
 #include <stdio.h>
 #include <string.h>
-
-// Global variable
-
-const unsigned char *inputMsg;
-
-unsigned char hash[crypto_generichash_BYTES];
-unsigned char sha256[crypto_hash_sha256_BYTES]; 
-unsigned char sha512[crypto_hash_sha512_BYTES];
 
 // Declare built-in function
 
 void headerScript();
-void hashHexadecimal();
+void hashBLAKE2b();
 
 // Main function 
 
@@ -29,8 +19,7 @@ int main(){
         return 0;
     }
 
-    hashHexadecimal(inputMsg);
-
+    hashBLAKE2b();
 
     return 0;
 }
@@ -39,24 +28,36 @@ int main(){
 
 void headerScript() {
     printf("=============================================================================\n");
-    printf("Hashing Script Using LibSodium in C Language\n");
-    printf("=============================================================================\n");
+    printf("||Hashing Script Using LibSodium in C Language.\t\t\t\t    #\n");
+    printf("||by Izfaha.\n");
+    printf("||This project is for learning purpose.\n");
+    printf("=============================================================================\n\n");
 }
 
-void hashHexadecimal(const unsigned char *inputMsg){
-    printf("Input your message you need to hash : "); scanf("%s", inputMsg);
+void hashBLAKE2b(){
+    // Local buffer for input with safe size limit
+    const unsigned char inputMsg[32764];
+
+    printf("Input your message you need to hash : "); 
+    if(scanf("%32764s", inputMsg) != 1) {
+        printf("Error reading input!\n");
+        return;
+    }
 
     /* size_t = an unsigned integer type used to represent the size of object in bytes 
         strlen() = calculate the lenght of a given string*/
-    size_t input_len = strlen(inputMsg); 
+    size_t input_len = strlen((const unsigned char *)inputMsg); 
     
+    // Hashing variable (local scope)
+    unsigned char blake2b_hash[crypto_generichash_BYTES];
+
     // The inputMsg will be hashed via crypto_generichash
-    crypto_generichash(hash, sizeof(hash), inputMsg, input_len, NULL, 0); 
+    crypto_generichash(blake2b_hash, sizeof(blake2b_hash), inputMsg, input_len, NULL, 0); 
 
     // Print the hash
-    printf("Hash : ");
-    for(size_t i; i < sizeof hash; i++) {
-        printf("%02x", hash[i]);
+    printf("\nBLAKE2b Hash : ");
+    for(size_t i; i < sizeof blake2b_hash; i++) {
+        printf("%02x", blake2b_hash[i]);
     }
     printf("\n");
 }
