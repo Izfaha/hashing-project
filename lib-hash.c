@@ -5,7 +5,9 @@
 // Declare built-in function
 
 void headerScript();
-void hashBLAKE2b();
+void hash_BLAKE2b();
+void hash_sha256();
+void hash_sha512();
 
 // Main function 
 
@@ -19,7 +21,23 @@ int main(){
         return 0;
     }
 
-    hashBLAKE2b();
+    int opt;
+
+    printf("Chose which hashing method you require to use.\n");
+    printf("Opt your option (1-4) : ");
+    scanf("%d", opt);
+
+    if (opt == 1) {
+        hash_BLAKE2b();
+    } else if (opt == 2)
+    {
+        hash_sha256();
+    } else if (opt == 3)
+    {
+        hash_sha512();
+    } else {
+        printf("Script is terminated!");
+    }
 
     return 0;
 }
@@ -32,6 +50,11 @@ void headerScript() {
     printf("||by Izfaha.\n");
     printf("||This project is for learning purpose.\n");
     printf("=============================================================================\n\n");
+    printf("Hashing Method :\n");
+    printf("1. BLAKE2b\n");
+    printf("2. SHA256\n");
+    printf("3. SHA512\n");
+    printf("4. Exit\n");
 }
 
 void hash_BLAKE2b(){
@@ -78,6 +101,26 @@ void hash_sha256() {
     printf("\nSHA256 Hash : ");
     for(size_t i = 0; i < sizeof(sha256_hash); i++) {
         printf("%02x", sha256_hash[i]);
+    }
+    printf("\n");
+}
+
+void hash_sha512() {
+    const unsigned char inputMsg[32764];
+
+    printf("Input your message you need to hash : ");
+    if(scanf("%32764s", inputMsg) != 1) {
+        printf("Error reading input!\n");
+        return;
+    }
+
+    size_t input_len = strlen((const unsigned char *)inputMsg);
+
+    unsigned char sha512_hash[crypto_hash_sha512_BYTES];
+
+    printf("\nSHA256 Hash : ");
+    for(size_t i = 0; i < sizeof(sha512_hash); i++) {
+        printf("%02x", sha512_hash[i]);
     }
     printf("\n");
 }
