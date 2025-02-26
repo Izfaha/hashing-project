@@ -4,10 +4,10 @@
 
 // Declare built-in function
 
-void headerScript();
-void hash_BLAKE2b();
-void hash_sha256();
-void hash_sha512();
+void headerScript(void);
+void hash_BLAKE2b(void);
+void hash_sha256(void);
+void hash_sha512(void);
 
 // Main function 
 
@@ -25,7 +25,7 @@ int main(){
 
     printf("Chose which hashing method you require to use.\n");
     printf("Opt your option (1-4) : ");
-    scanf("%d", opt);
+    scanf("%d", &opt);
 
     if (opt == 1) {
         hash_BLAKE2b();
@@ -37,6 +37,7 @@ int main(){
         hash_sha512();
     } else {
         printf("Script is terminated!");
+        return 1;
     }
 
     return 0;
@@ -44,7 +45,7 @@ int main(){
 
 //  built-in function
 
-void headerScript() {
+void headerScript(void) {
     printf("=============================================================================\n");
     printf("||Hashing Script Using LibSodium in C Language.\t\t\t\t    #\n");
     printf("||by Izfaha.\n");
@@ -57,7 +58,7 @@ void headerScript() {
     printf("4. Exit\n");
 }
 
-void hash_BLAKE2b(){
+void hash_BLAKE2b(void){
     // Local buffer for input with safe size limit
     const unsigned char inputMsg[32764];
 
@@ -85,7 +86,7 @@ void hash_BLAKE2b(){
     printf("\n");
 }
 
-void hash_sha256() {
+void hash_sha256(void) {
     const unsigned char inputMsg[32764];
 
     printf("Input your message you need to hash : ");
@@ -105,7 +106,7 @@ void hash_sha256() {
     printf("\n");
 }
 
-void hash_sha512() {
+void hash_sha512(void) {
     const unsigned char inputMsg[32764];
 
     printf("Input your message you need to hash : ");
