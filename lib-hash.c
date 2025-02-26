@@ -34,7 +34,7 @@ void headerScript() {
     printf("=============================================================================\n\n");
 }
 
-void hashBLAKE2b(){
+void hash_BLAKE2b(){
     // Local buffer for input with safe size limit
     const unsigned char inputMsg[32764];
 
@@ -62,3 +62,22 @@ void hashBLAKE2b(){
     printf("\n");
 }
 
+void hash_sha256() {
+    const unsigned char inputMsg[32764];
+
+    printf("Input your message you need to hash : ");
+    if(scanf("%32764s", inputMsg) != 1) {
+        printf("Error reading input!\n");
+        return;
+    }
+
+    size_t input_len = strlen((const unsigned char *)inputMsg);
+
+    unsigned char sha256_hash[crypto_hash_sha256_BYTES];
+
+    printf("\nSHA256 Hash : ");
+    for(size_t i = 0; i < sizeof(sha256_hash); i++) {
+        printf("%02x", sha256_hash[i]);
+    }
+    printf("\n");
+}
