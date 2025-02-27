@@ -25,21 +25,20 @@ int main(){
 
     printf("Chose which hashing method you require to use.\n");
     printf("Opt your option (1-4) : ");
-    scanf("%d", &opt);
-
-    if (opt == 1) {
-        hash_BLAKE2b();
-    } else if (opt == 2)
-    {
-        hash_sha256();
-    } else if (opt == 3)
-    {
-        hash_sha512();
-    } else {
-        printf("Script is terminated!");
+    if(scanf("%d", &opt) != 1) {
+        printf("Invalid input!");
         return 1;
     }
 
+    switch (opt)
+    {
+    case 1: hash_BLAKE2b(); break;
+    case 2: hash_sha256(); break;
+    case 3: hash_sha512(); break;
+    case 4: printf("Script terminated!"); return 0;
+    default: printf("Invalid option!"); return 1;
+    }
+    
     return 0;
 }
 
@@ -60,10 +59,10 @@ void headerScript(void) {
 
 void hash_BLAKE2b(void){
     // Local buffer for input with safe size limit
-    const unsigned char inputMsg[32764];
+    const unsigned char inputMsg[1024];
 
     printf("Input your message you need to hash : "); 
-    if(scanf("%32764s", inputMsg) != 1) {
+    if(scanf("%1024s", inputMsg) != 1) {
         printf("Error reading input!\n");
         return;
     }
@@ -87,10 +86,10 @@ void hash_BLAKE2b(void){
 }
 
 void hash_sha256(void) {
-    const unsigned char inputMsg[32764];
+    const unsigned char inputMsg[1024];
 
     printf("Input your message you need to hash : ");
-    if(scanf("%32764s", inputMsg) != 1) {
+    if(scanf("%1024s", inputMsg) != 1) {
         printf("Error reading input!\n");
         return;
     }
@@ -107,10 +106,10 @@ void hash_sha256(void) {
 }
 
 void hash_sha512(void) {
-    const unsigned char inputMsg[32764];
+    const unsigned char inputMsg[1024];
 
     printf("Input your message you need to hash : ");
-    if(scanf("%32764s", inputMsg) != 1) {
+    if(scanf("%1024s", inputMsg) != 1) {
         printf("Error reading input!\n");
         return;
     }
